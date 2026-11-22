@@ -465,6 +465,24 @@
 .history-item .history-num{display:inline-block;min-width:0;line-height:1;flex:0 1 auto;font-variant-numeric:tabular-nums}
 .history-item .history-arrow{width:.82em;height:.82em;flex:0 0 .82em;display:block;color:#735337;transform:translateY(-.045em);overflow:visible}
 .history-item.empty .history-arrow{color:#a79a89}
+
+/* 2026-11-22: Correct next-stage button compression after showing the 4 choices.
+   Preserve original image aspect ratio; do not shrink the button to fit its flex parent. */
+.go.next-go,.go.next-go:hover,.go.next-go:focus-visible{
+  display:block;
+  flex:0 0 auto!important;
+  width:min(91%,440px)!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:1250 / 417!important;
+  background-size:100% 100%!important;
+  align-self:center;
+}
+@media (orientation:landscape) and (max-height:560px){
+  .go.next-go,.go.next-go:hover,.go.next-go:focus-visible{
+    width:min(86%,360px)!important;
+  }
+}
 </style>
 </head>
 <body>
