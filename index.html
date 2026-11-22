@@ -504,9 +504,10 @@
 @media (max-width:699px) and (orientation:portrait){
   .app:has(#nextBtn:not(.hide)) .stage{
     flex:0 1 auto!important;
-    height:clamp(205px,31dvh,325px)!important;
-    min-height:205px!important;
+    height:clamp(180px,27dvh,285px)!important;
+    min-height:180px!important;
   }
+  .app:has(#nextBtn:not(.hide)){gap:5px}
   .app:has(#nextBtn:not(.hide)) .action-area{flex-shrink:0}
   .app:has(#nextBtn:not(.hide)) .go.next-go{
     flex-shrink:0!important;
