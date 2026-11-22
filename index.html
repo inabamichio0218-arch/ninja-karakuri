@@ -345,6 +345,10 @@
  }
 }
 
+/* iPhone縦画面だけ: タイトル看板右上の余白にinfoを合わせる。PCは変更しない */
+@media (max-width:699px) and (orientation:portrait){
+  .mast .info{top:24px;right:clamp(12px,3.5vw,20px)}
+}
 /* インフォ画面：PowerPointで作った縦長デザインをそのまま使用 */
 .info{
   background:transparent!important;border:0!important;box-shadow:none!important;
