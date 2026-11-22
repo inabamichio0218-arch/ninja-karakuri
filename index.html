@@ -459,6 +459,12 @@
 @media (orientation:landscape) and (max-height:560px){
   .title-lock{top:0;width:min(74%,291px)}
 }
+
+/* 履歴の矢印は文字の「→」を使わず、太線SVGで縦中央に固定 */
+.history-item{gap:clamp(2px,.65vw,5px);letter-spacing:0}
+.history-item .history-num{display:inline-block;min-width:0;line-height:1;flex:0 1 auto;font-variant-numeric:tabular-nums}
+.history-item .history-arrow{width:.82em;height:.82em;flex:0 0 .82em;display:block;color:#735337;transform:translateY(-.045em);overflow:visible}
+.history-item.empty .history-arrow{color:#a79a89}
 </style>
 </head>
 <body>
@@ -521,7 +527,7 @@
   <section class="history" aria-label="数字の変化の記録">
     <div class="history-head"><span id="progress">0 / 3</span></div>
     <div class="history-items" id="historyItems" aria-live="polite">
-      <div class="history-item empty">？ → ？</div><div class="history-item empty">？ → ？</div><div class="history-item empty">？ → ？</div>
+      <div class="history-item empty"><span class="history-num">？</span><svg class="history-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12H20M13 5L20 12L13 19" fill="none" stroke="currentColor" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/></svg><strong class="history-num">？</strong></div><div class="history-item empty"><span class="history-num">？</span><svg class="history-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12H20M13 5L20 12L13 19" fill="none" stroke="currentColor" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/></svg><strong class="history-num">？</strong></div><div class="history-item empty"><span class="history-num">？</span><svg class="history-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12H20M13 5L20 12L13 19" fill="none" stroke="currentColor" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/></svg><strong class="history-num">？</strong></div>
     </div>
   </section>
   <div class="sr-only" id="prompt" aria-live="polite">数字の変化を3回見て、計算の術を選びます</div>
@@ -633,8 +639,17 @@ function updateHistory(){
  history.replaceChildren();
  for(let i=0;i<3;i++){
   const el=document.createElement('div');el.className='history-item';
-  if(i<state.step){const n=document.createElement('span');n.textContent=`${state.q.inputs[i]} → `;const x=document.createElement('strong');x.textContent=state.q.outputs[i];if(String(state.q.inputs[i]).length+String(state.q.outputs[i]).length>=5)el.classList.add('long');el.append(n,x)}
-  else{el.classList.add('empty');el.textContent='？ → ？'}
+  const n=document.createElement('span');n.className='history-num';
+  const x=document.createElement('strong');x.className='history-num';
+  if(i<state.step){
+   n.textContent=state.q.inputs[i];x.textContent=state.q.outputs[i];
+   if(String(state.q.inputs[i]).length+String(state.q.outputs[i]).length>=5)el.classList.add('long');
+  }else{el.classList.add('empty');n.textContent='？';x.textContent='？'}
+  const arrow=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  arrow.setAttribute('class','history-arrow');arrow.setAttribute('viewBox','0 0 24 24');
+  arrow.setAttribute('aria-hidden','true');arrow.setAttribute('focusable','false');
+  arrow.innerHTML='<path d="M3 12H20M13 5L20 12L13 19" fill="none" stroke="currentColor" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/>';
+  el.append(n,arrow,x);
   history.appendChild(el);
  }
  progress.textContent=`${state.step} / 3`;
