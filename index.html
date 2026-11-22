@@ -498,6 +498,21 @@
   .smoke-puff:nth-child(3),.smoke-puff:nth-child(4),.smoke-puff:nth-child(8),.smoke-puff:nth-child(11),.smoke-puff:nth-child(13),.smoke-puff:nth-child(14),.smoke-puff:nth-child(16),.smoke-puff:nth-child(17){--smoke-peak:.055}
   .smoke-puff:nth-child(9),.smoke-puff:nth-child(15){--smoke-peak:.23}
 }
+
+/* iPhone portrait: a solved question adds a large next-stage button below four choices.
+   Use space from the stage instead of cutting off the button at the viewport edge. */
+@media (max-width:699px) and (orientation:portrait){
+  .app:has(#nextBtn:not(.hide)) .stage{
+    flex:0 1 auto!important;
+    height:clamp(205px,31dvh,325px)!important;
+    min-height:205px!important;
+  }
+  .app:has(#nextBtn:not(.hide)) .action-area{flex-shrink:0}
+  .app:has(#nextBtn:not(.hide)) .go.next-go{
+    flex-shrink:0!important;
+    margin-bottom:calc(8px + env(safe-area-inset-bottom,0px));
+  }
+}
 </style>
 </head>
 <body>
