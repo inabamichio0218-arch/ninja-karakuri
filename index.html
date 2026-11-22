@@ -373,13 +373,13 @@
   padding:calc(env(safe-area-inset-top,0px) + 10px) 0 env(safe-area-inset-bottom,0px);
 }
 .info-sheet{
-  width:min(100%,540px,56.25dvh);flex:none;position:relative;
+  width:min(100%,540px);flex:none;position:relative;
   margin:0 auto;line-height:0;
 }
 .info-art{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:contain}
-.info-back-holder{position:absolute;left:0;right:0;bottom:2%;display:flex;justify-content:center;align-items:center
+.info-back-holder{position:absolute;left:0;right:0;bottom:1.2%;display:flex;justify-content:center;align-items:center;pointer-events:none}
 .info-back{
-  width:62%;aspect-ratio:3.0;min-height:44px;
+  width:66%;aspect-ratio:1400 / 379;min-height:0;pointer-events:auto;
   background:transparent;border:0;padding:0;margin:0;
   display:grid;place-items:center;filter:drop-shadow(0 3px 2px #0a252799);
   transform-origin:center;transition:transform .12s ease;
@@ -396,7 +396,7 @@
   .info-back{width:65%;min-height:44px}
 }
 @media(max-height:680px) and (orientation:portrait){
-  .info-sheet{width:min(100%,540px,56.25dvh)}
+  .info-sheet{width:min(100%,540px)}
 }
 
 /* PC版のみ: 画面下部に余白が多い場合、からくり舞台を縦に広げて活用する。
@@ -428,6 +428,15 @@
   html.ninja-pwa-lock .info-scroll{touch-action:pan-y;overscroll-behavior:contain}
 }
 
+
+/* iPhone portrait: place the info icon on the right edge of the white title strip,
+   vertically aligned with the PowerPoint logo. This comes LAST in the cascade. */
+@media (max-width:699px) and (orientation:portrait){
+  .mast > .info{top:40px!important;right:13px!important;width:43px!important;height:43px!important}
+}
+/* Info sheet button sits in the image's originally empty lower margin. */
+.info-back-holder{bottom:1.1%;}
+.info-back{width:66%;aspect-ratio:1400 / 379;min-height:0}
 </style>
 </head>
 <body>
