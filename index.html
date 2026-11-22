@@ -483,6 +483,21 @@
     width:min(86%,360px)!important;
   }
 }
+
+/* PC only: the larger stage needs a fuller smoke cloud.
+   Keep the center translucent so the revolving wooden panel stays visible.
+   No changes to touch/mobile (Safari / home-screen) rendering. */
+@media screen and (min-width:1060px) and (hover:hover) and (pointer:fine){
+  .smoke-puff{
+    transform:translate(-50%,-50%) scale(calc(var(--grow,2.2) * 1.32)) rotate(var(--rot,8deg));
+    filter:blur(5px);
+  }
+  .smoke-puff.smoke-low{filter:blur(6px)}
+  .smoke-puff{--smoke-peak:.42}
+  .smoke-puff:nth-child(2),.smoke-puff:nth-child(7),.smoke-puff:nth-child(10),.smoke-puff:nth-child(12){--smoke-peak:.27}
+  .smoke-puff:nth-child(3),.smoke-puff:nth-child(4),.smoke-puff:nth-child(8),.smoke-puff:nth-child(11),.smoke-puff:nth-child(13),.smoke-puff:nth-child(14),.smoke-puff:nth-child(16),.smoke-puff:nth-child(17){--smoke-peak:.055}
+  .smoke-puff:nth-child(9),.smoke-puff:nth-child(15){--smoke-peak:.23}
+}
 </style>
 </head>
 <body>
