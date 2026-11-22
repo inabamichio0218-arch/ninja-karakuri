@@ -437,6 +437,28 @@
 /* Info sheet button sits in the image's originally empty lower margin. */
 .info-back-holder{bottom:1.1%;}
 .info-back{width:66%;aspect-ratio:1400 / 379;min-height:0}
+
+/* Title and info icon share one responsive coordinate system: no independent top/right offsets. */
+.title-lock{
+  position:absolute;z-index:3;top:8px;left:50%;transform:translateX(-50%);
+  width:95%;max-width:505px;pointer-events:none;
+}
+.title-lock .header-img{
+  position:static;left:auto;top:auto;transform:none;width:100%;max-width:none;
+  height:auto;display:block;
+}
+.title-lock .info{
+  position:absolute!important;top:50%!important;right:3.5%!important;
+  transform:translateY(-50%);z-index:5;pointer-events:auto;
+  width:clamp(37px,8vw,47px)!important;height:clamp(37px,8vw,47px)!important;
+}
+.title-lock .info:active{transform:translateY(-50%) scale(.94)}
+@media (max-height:740px) and (orientation:portrait){
+  .title-lock{width:90%}
+}
+@media (orientation:landscape) and (max-height:560px){
+  .title-lock{top:0;width:min(74%,291px)}
+}
 </style>
 </head>
 <body>
@@ -447,8 +469,10 @@
     <img class="gear g2" src="assets/gear.webp" alt="" aria-hidden="true">
     <img class="gear g3" src="assets/gear.webp" alt="" aria-hidden="true">
     <img class="gear g4" src="assets/gear.webp" alt="" aria-hidden="true">
-    <img class="header-img" src="assets/title.webp" alt="PowerPoint Webアプリ 忍者からくり屋敷">
-    <button type="button" id="infoBtn" class="info" aria-label="インフォ・遊び方・利用について" title="インフォ"><img src="assets/info_icon.webp" alt="" aria-hidden="true"></button>
+    <div class="title-lock">
+      <img class="header-img" src="assets/title.webp" alt="PowerPoint Webアプリ 忍者からくり屋敷">
+      <button type="button" id="infoBtn" class="info" aria-label="インフォ・遊び方・利用について" title="インフォ"><img src="assets/info_icon.webp" alt="" aria-hidden="true"></button>
+    </div>
   </header>
   <nav class="difficulty" aria-label="難易度">
     <span class="sr-only">難易度</span>
